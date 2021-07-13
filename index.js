@@ -1,16 +1,37 @@
-const { question } = require("readline-sync");
-const { displayWordSoFar, isGameWon, isGameLost } = require("./gamelogic");
-
+const {question} = require("readline-sync")
+const {displayWordSoFar, isGameWon, wrongGuesses} = require("./gamelogic")
+let letter = ""
 function game(word, guesses) {
-  console.log("Dit heb je tot nu toe geraden: ", guesses);
+    console.log(displayWordSoFar(word, guesses))
+    console.log("Dit heb je tot nu toe geraden: "+guesses)
+    console.log("Aantal foute letters "+wrongGuesses(word, guesses))
 
-  const letter = question("Raad een letter: ");
+    while (true) {
+        letter = question("Raad een letter: ")
+        if (letter.length === 1) {
+            break
+        } else {
+            console.log("Er mag maar één letter tegelijk worden ingegeven!")
+        }
+    }       // const letter = question("Raad een letter: ");
 
-  // voeg de geraden letter toe aan de array met guesses
-  guesses.push(letter);
+    // voeg de geraden letter toe aan de array met guesses
+    guesses.push(letter.toLowerCase())
 
-  // volgende ronde! we roepen game nog een keer aan
-  game(word, guesses);
+
+    if (isGameWon(word, guesses)) {
+        console.log("Super, gefeliciteerd")
+        return
+    }
+    if (wrongGuesses(word, guesses)===7) {
+        console.log("Jammer, je hebt er 7 fout!")
+        return
+    }
+
+
+    // volgende ronde! we roepen game nog een keer aan
+    game(word, guesses)
+
 }
 
 console.log(`
@@ -21,6 +42,6 @@ __________
 |      / \\   ██║░░╚██╗██╔══██║██║░░░░░██║░░╚██╗██╗░░██║██╔══╝░░
 |            ╚██████╔╝██║░░██║███████╗╚██████╔╝╚█████╔╝███████╗
 ===========  ░╚═════╝░╚═╝░░╚═╝╚══════╝░╚═════╝░░╚════╝░╚══════╝
-`);
+`)
 
-game("javascript", []);
+game("javascript", [])
