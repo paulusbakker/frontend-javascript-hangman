@@ -14,9 +14,6 @@ function isGameWon(word, guesses) {
     return !(displayWordSoFar(word, guesses).indexOf('_') > -1);
 }
 
-// return chars.length === 0;
-
-
 function wrongGuesses(word, guesses) {
     let wrongGuesses = 0
     for (let i = 0; i < guesses.length; i++) {
