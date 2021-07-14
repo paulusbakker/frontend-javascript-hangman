@@ -4,10 +4,14 @@ let letter = ""
 
 function game(word, guesses) {
     console.log(displayWordSoFar(word, guesses))
-    console.log("Dit heb je tot nu toe geraden: " + guesses)
-    console.log("Aantal foute letters " + wrongGuesses(word, guesses))
+    // alleen als guesses letters bevat wordt onderstaande zin gelogged, vind ik netter
+    if (guesses.length) {
+        console.log("Dit heb je tot nu toe geraden: " + guesses)
+    }
+    console.log("Aantal fout geraden letters: " + wrongGuesses(word, guesses))
 
-    // loop om de het ingegeven antwoord te controleren
+    // loop om het ingegeven antwoord te controleren
+    // pas wanneer het antwoord één letter bevat wordt er uit de loop gesprongen
     while (true) {
         letter = question("Raad een letter: ")
         if (letter.length === 1) {
