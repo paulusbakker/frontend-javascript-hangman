@@ -7,6 +7,7 @@ function game(word, guesses) {
     console.log("Dit heb je tot nu toe geraden: " + guesses)
     console.log("Aantal foute letters " + wrongGuesses(word, guesses))
 
+    // loop om de het ingegeven antwoord te controleren
     while (true) {
         letter = question("Raad een letter: ")
         if (letter.length === 1) {
@@ -14,7 +15,7 @@ function game(word, guesses) {
         } else {
             console.log("Er mag maar één letter tegelijk worden ingegeven!")
         }
-    }       // const letter = question("Raad een letter: ");
+    }
 
     // voeg de geraden letter toe aan de array met guesses
     guesses.push(letter.toLowerCase())
